@@ -1,0 +1,47 @@
+{
+	"name": "@morlz/motion",
+	"version": "1.0.0",
+	"description": "Vue directives for transition components between routes",
+	"author": "morlz <morlz@mail.ru>",
+	"private": true,
+	"scripts": {
+		"dev": "parcel ./src/demo/index.html",
+		"start": "npm run dev",
+		"build": "parcel build ./src/lib/index.js"
+	},
+	"dependencies": {
+		"@babel/runtime": "^7.1.5",
+		"core-js": "^2.5.7",
+		"dom-css": "^2.1.0",
+		"popmotion": "^8.5.2"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.0.0-0",
+		"@babel/plugin-transform-runtime": "^7.1.0",
+		"@babel/preset-env": "^7.1.6",
+		"@vue/component-compiler-utils": "^2.3.0",
+		"autoprefixer": "^9.3.1",
+		"babel-plugin-module-resolver": "^3.1.1",
+		"babel-plugin-syntax-dynamic-import": "^6.18.0",
+		"babel-plugin-transform-async-to-generator": "^6.24.1",
+		"babel-plugin-transform-runtime": "^6.23.0",
+		"postcss-import": "^12.0.1",
+		"postcss-url": "^8.0.0",
+		"stylus": "^0.54.5",
+		"vue-template-compiler": "^2.5.17",
+		"vue-hot-reload-api": "^2.3.1",
+		"vue-router": "^3.0.1",
+		"vuex": "^3.0.1",
+		"vue": "^2.5.17",
+		"regenerator-runtime": "^0.13.1"
+	},
+	"engines": {
+		"node": ">= 10.0.0",
+		"npm": ">= 6.0.0"
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not ie <= 8"
+	]
+}

@@ -1,0 +1,19 @@
+{
+	"presets": [
+		["@babel/preset-env", {
+			"modules": false,
+			"useBuiltIns": false
+		}]
+	],
+	"plugins": [
+		["babel-plugin-module-resolver", {
+			"alias": {
+				"@": "./src",
+				"#": "./src/demo/components",
+				"~": "./",
+				"@morlz/motion": "./src/lib"
+			}
+		}],
+		"@babel/plugin-transform-runtime"
+	]
+}
