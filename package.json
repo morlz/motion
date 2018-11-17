@@ -1,6 +1,6 @@
 {
 	"name": "@morlz/motion",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"main": "./dist/motion.min.js",
 	"keywords": [
 		"vue",
@@ -8,10 +8,13 @@
 		"material",
 		"morlz"
 	],
+	"files": [
+		"dist/motion.min.js"
+	],
 	"license": "MIT",
 	"description": "Vue directives for transition components between routes",
 	"author": "morlz <morlz@mail.ru>",
-	"private": false,
+	"homepage": "https://github.com/morlz/motion",
 	"scripts": {
 		"dev": "parcel ./src/demo/index.html --out-dir serve",
 		"start": "npm run dev",
