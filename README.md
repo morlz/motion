@@ -2,7 +2,9 @@
 
 ## Demo
 
-demolink
+```
+npm run dev
+```
 
 ## Installing
 

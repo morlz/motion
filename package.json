@@ -1,13 +1,21 @@
 {
 	"name": "@morlz/motion",
-	"version": "1.0.0",
+	"version": "0.0.1",
+	"main": "./dist/motion.min.js",
+	"keywords": [
+		"vue",
+		"motion",
+		"material",
+		"morlz"
+	],
+	"license": "MIT",
 	"description": "Vue directives for transition components between routes",
 	"author": "morlz <morlz@mail.ru>",
-	"private": true,
+	"private": false,
 	"scripts": {
-		"dev": "parcel ./src/demo/index.html",
+		"dev": "parcel ./src/demo/index.html --out-dir serve",
 		"start": "npm run dev",
-		"build": "parcel build ./src/lib/index.js"
+		"build": "parcel build ./src/lib/index.js --out-file motion.min.js --no-source-maps"
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.1.5",
@@ -33,7 +41,8 @@
 		"vue-router": "^3.0.1",
 		"vuex": "^3.0.1",
 		"vue": "^2.5.17",
-		"regenerator-runtime": "^0.13.1"
+		"regenerator-runtime": "^0.13.1",
+		"parcel-bundler": "^1.10.3"
 	},
 	"engines": {
 		"node": ">= 10.0.0",
