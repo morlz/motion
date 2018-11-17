@@ -1,24 +1,25 @@
-
+import ListLayout from '#/ListLayout'
+import List from '#/List'
+import ItemFull from '#/ItemFull'
 
 export default [
 	{
 		path: '/',
-		component: () =>import ('#/ListLayout'),
+		component: ListLayout,
 		children: [
 			{
 				path: '',
 				components: {
-					list: () => import ('#/List')
+					list: List
 				},
 			},
 			{
 				path: ':id',
 				components: {
-					list: () => import ('#/List'),
-					modal: () => import ('#/ItemFull')
+					list: List,
+					modal: ItemFull
 				}
 			},
 		]
 	},
-
 ]

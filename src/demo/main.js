@@ -3,7 +3,7 @@ import Vue from 'vue'
 import router from './router'
 import store from './store'
 import App from './App'
-import Motion from '@morlz/motion'
+import Motion from '~/dist/motion.min.js'
 
 Vue.config.productionTip = false
 

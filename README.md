@@ -3,7 +3,7 @@
 ## Demo
 
 ```
-npm run dev
+npm run demo
 ```
 
 ## Installing

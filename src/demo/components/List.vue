@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Item from '#/Item'
+import Item from './Item'
 
 export default {
 	name: 'List',
