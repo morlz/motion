@@ -39,9 +39,11 @@ export const MotionTo = {
 			overflow: 'hidden'
 		})
 
+		await store.waitForReady(name)
 		await waitForCreate(_vm)
 
 		_vm.$once('motion:show', () => {
+			store.start(name)
 			tween({
 				from: {
 					...styles,
@@ -54,11 +56,14 @@ export const MotionTo = {
 					toHeight: full.height,
 				},
 				...anim
-			}).start({
+			})
+			.while(e => store.isRuning(name))
+			.start({
 				update: v => setStyles(_vm, el, v),
 				complete: e => {
 					css.set(el, 'overflow', oldOveflow)
 					_vm.$emit('motion:showed')
+					store.stop(name)
 				}
 			})
 		})
@@ -69,6 +74,7 @@ export const MotionTo = {
 
 			css.set(el, 'overflow', 'hidden')
 
+			store.start(name)
 			tween({
 				from: {
 					...full,
@@ -81,11 +87,14 @@ export const MotionTo = {
 					toHeight: styles.height,
 				},
 				...anim
-			}).start({
+			})
+			.while(e => store.isRuning(name))
+			.start({
 				update: v => setStyles(_vm, el, v),
 				complete: e => {
 					css.set(el, 'overflow', oldOveflow)
 					_vm.$emit('motion:hided')
+					store.stop(name)
 				}
 			})
 		})

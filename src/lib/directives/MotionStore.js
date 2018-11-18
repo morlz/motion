@@ -3,6 +3,7 @@ class MotionStore {
 	constructor () {
 		this.motions = {}
 		this.rounds = {}
+		this.active = {}
 	}
 
 	get (name) {
@@ -29,6 +30,30 @@ class MotionStore {
 
 	setRound (name, value = 1) {
 		this.rounds[name] = value
+	}
+
+	start (name) {
+		this.active[name] = true
+	}
+
+	stop (name) {
+		if (typeof this.active[name] == 'function')
+			this.active[name]()
+
+		this.active[name] = false
+	}
+
+	isRuning (name) {
+		return !!+this.active[name]
+	}
+
+	waitForReady (name) {
+		return new Promise(resolve => {
+			if (this.isRuning(name))
+				this.active[name] = resolve
+			else
+				resolve()
+		})
 	}
 }
 
