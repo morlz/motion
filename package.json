@@ -1,6 +1,6 @@
 {
 	"name": "@morlz/motion",
-	"version": "0.0.6",
+	"version": "0.0.8",
 	"main": "./dist/motion.min.umd.js",
 	"keywords": [
 		"vue",
