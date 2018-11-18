@@ -5,6 +5,7 @@ import css from 'dom-css'
 import { setStyles, waitForCreate } from '../utils'
 
 const __inject = async vm => {
+	vm.$motion = {}
 	vm.__motionInjected = true
 	vm.$emit('motion:show')
 }

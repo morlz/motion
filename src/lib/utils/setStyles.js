@@ -44,5 +44,6 @@ export default (vm, node, styles) => {
 	//if (firstChild) css(firstChild, formatters.firstChild(styles))
 	if (toolbar) css(toolbar, formatters.toolbar(styles))
 
+	vm.$emit('motion:move', vm.$motion)
 	vm.$forceUpdate()
 }
