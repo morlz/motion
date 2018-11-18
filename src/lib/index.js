@@ -1,5 +1,6 @@
 //import '@babel/polyfill'
 import * as _directives from './directives'
+import store from './directives/MotionStore'
 import { waitForCreate } from './utils'
 
 export default {
@@ -14,16 +15,19 @@ export default {
 
 		Vue.mixin({
 			async beforeRouteUpdate(to, from, next) {
+				if (!this.__motionInjected)
+					return next()
+
+				await store.resolve(name)
 				next()
 
-				if (!this.__motionInjected) return
 				await waitForCreate(this)
   				this.$nextTick(e => this.$emit('motion:show'))
 			},
 			beforeRouteLeave (to, from, next) {
 				if (this.__motionInjected) {
+					this.$once('motion:hided', e => next())
 					this.$emit('motion:hide')
-					setTimeout(() => next(), 400)
 				} else
 					next()
 			}

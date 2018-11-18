@@ -42,6 +42,8 @@ export const MotionTo = {
 		_vm.$on('motion:show', () => {
 			const styles = store.get(name)
 
+			store.open(name)
+
 			tween({
 				from: {
 					...styles,
@@ -87,6 +89,7 @@ export const MotionTo = {
 				update: v => setStyles(_vm, el, v),
 				complete: e => {
 					css.set(el, 'overflow', oldOveflow)
+					store.close(name)
 					_vm.$emit('motion:hided')
 				}
 			})

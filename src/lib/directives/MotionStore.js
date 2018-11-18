@@ -3,6 +3,7 @@ class MotionStore {
 	constructor () {
 		this.motions = {}
 		this.rounds = {}
+		this.opened = {}
 	}
 
 	get (name) {
@@ -31,6 +32,32 @@ class MotionStore {
 
 	setRound (name, value = 1) {
 		this.rounds[name] = value
+	}
+
+	open (name) {
+		if (this.isOpened(name)) return
+
+		this.opened[name] = true
+	}
+
+	close (name) {
+		if (typeof this.opened[name] == 'function')
+			this.opened[name]()
+
+		this.opened[name] = false
+	}
+
+	isOpened (name) {
+		return !!this.opened[name]
+	}
+
+	resolve (name) {
+		return new Promise(resolve => {
+			if (this.isOpened(name))
+				this.opened[name] = resolve
+			else
+				resolve()
+		})
 	}
 }
 
