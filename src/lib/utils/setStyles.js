@@ -30,7 +30,6 @@ const formatters = {
 const __getObjects = node => ({
 	wrapper: node,
 	content: node.querySelector('.modal-content'),
-	firstChild: node.querySelector('.modal-content > *'),
 	toolbar: node.querySelector('.modal-toolbar')
 })
 
@@ -41,7 +40,6 @@ export default (vm, node, styles) => {
 	let { wrapper, content, toolbar, firstChild } = __getObjects(node)
 	if (wrapper) css(wrapper, formatters.wrapper(styles))
 	if (content) css(content, formatters.content(styles))
-	//if (firstChild) css(firstChild, formatters.firstChild(styles))
 	if (toolbar) css(toolbar, formatters.toolbar(styles))
 
 	vm.$emit('motion:move', vm.$motion)

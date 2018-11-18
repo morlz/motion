@@ -4,7 +4,7 @@ import css from 'dom-css'
 
 import { setStyles, waitForCreate } from '../utils'
 
-const __inject = async vm => {
+const __inject = async (vm, name) => {
 	vm.$motion = {}
 	vm.__motionInjected = true
 	vm.$emit('motion:show')
@@ -13,8 +13,6 @@ const __inject = async vm => {
 const full = {
 	width: 100,
 	height: 100,
-	cx: 0,
-	cy: 0,
 	x: 0,
 	y: 0,
 	r: 0,
@@ -29,9 +27,9 @@ const anim = {
 export const MotionTo = {
 	async bind (el, binding, vnode) {
 		const _vm = vnode.context //vnode.componentInstance || vnode.context
-		const styles = store.get(binding.value)
+		const name = binding.value
 
-		if (styles === null || _vm.__motionInjected) return
+		if (!store.has(name) || _vm.__motionInjected) return
 
 		const oldOveflow = css.get(el, 'overflow')
 		css.set(el, {
@@ -39,11 +37,11 @@ export const MotionTo = {
 			overflow: 'hidden'
 		})
 
-		await store.waitForReady(name)
 		await waitForCreate(_vm)
 
-		_vm.$once('motion:show', () => {
-			store.start(name)
+		_vm.$on('motion:show', () => {
+			const styles = store.get(name)
+
 			tween({
 				from: {
 					...styles,
@@ -57,24 +55,21 @@ export const MotionTo = {
 				},
 				...anim
 			})
-			.while(e => store.isRuning(name))
 			.start({
 				update: v => setStyles(_vm, el, v),
 				complete: e => {
 					css.set(el, 'overflow', oldOveflow)
 					_vm.$emit('motion:showed')
-					store.stop(name)
 				}
 			})
 		})
 
-		_vm.$once('motion:hide', () => {
-			const styles = store.get(binding.value)
+		_vm.$on('motion:hide', () => {
+			const styles = store.get(name)
 			if (styles === null) return
 
 			css.set(el, 'overflow', 'hidden')
 
-			store.start(name)
 			tween({
 				from: {
 					...full,
@@ -88,17 +83,15 @@ export const MotionTo = {
 				},
 				...anim
 			})
-			.while(e => store.isRuning(name))
 			.start({
 				update: v => setStyles(_vm, el, v),
 				complete: e => {
 					css.set(el, 'overflow', oldOveflow)
 					_vm.$emit('motion:hided')
-					store.stop(name)
 				}
 			})
 		})
 
-		await __inject(_vm)
+		await __inject(_vm, name)
 	}
 }

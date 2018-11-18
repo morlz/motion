@@ -2,8 +2,12 @@ import store from './MotionStore'
 
 export const MotionFrom = {
 	bind (el, binding, vnode) {
-		el.addEventListener('click', e => store.set(binding.value, el))
+		const _vm = vnode.context
+		const name = binding.value
+
+		el.addEventListener('click', e => store.set(name, el))
+
 		if (binding.modifiers.round)
-			store.setRound(binding.value)
+			store.setRound(name)
 	}
 }

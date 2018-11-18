@@ -12,6 +12,12 @@ export default {
 			.map(directive => Vue.directive(directive, directives[directive]))
 
 		Vue.mixin({
+			beforeRouteUpdate(to, from, next) {
+				if (this.__motionInjected)
+  					this.$nextTick(e => this.$emit('motion:show'))
+
+				next()
+			},
 			beforeRouteLeave (to, from, next) {
 				if (this.__motionInjected) {
 					this.$emit('motion:hide')
