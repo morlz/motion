@@ -54,11 +54,7 @@ export const MotionTo = {
 				},
 				...anim
 			}).start({
-				update: v => {
-					setStyles(el, v)
-					_vm.$motion = v
-					_vm.$forceUpdate()
-				},
+				update: v => setStyles(_vm, el, v),
 				complete: e => {
 					css.set(el, 'overflow', oldOveflow)
 					_vm.$emit('motion:showed')
@@ -85,11 +81,7 @@ export const MotionTo = {
 				},
 				...anim
 			}).start({
-				update: v => {
-					setStyles(el, v)
-					_vm.$motion = v
-					_vm.$forceUpdate()
-				},
+				update: v => setStyles(_vm, el, v),
 				complete: e => {
 					css.set(el, 'overflow', oldOveflow)
 					_vm.$emit('motion:hided')

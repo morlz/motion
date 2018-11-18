@@ -34,10 +34,15 @@ const __getObjects = node => ({
 	toolbar: node.querySelector('.modal-toolbar')
 })
 
-export default (node, styles) => {
+export default (vm, node, styles) => {
+	for (var style in styles)
+		vm.$motion[style] = styles[style]
+
 	let { wrapper, content, toolbar, firstChild } = __getObjects(node)
 	if (wrapper) css(wrapper, formatters.wrapper(styles))
 	if (content) css(content, formatters.content(styles))
 	//if (firstChild) css(firstChild, formatters.firstChild(styles))
 	if (toolbar) css(toolbar, formatters.toolbar(styles))
+
+	vm.$forceUpdate()
 }
