@@ -10,7 +10,7 @@
 	],
 	"files": [
 		"dist/motion.min.umd.js",
-		"demo.gif",
+		"demo.gif"
 	],
 	"license": "MIT",
 	"description": "Vue directives for transition components between routes",
