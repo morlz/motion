@@ -27,7 +27,7 @@ const anim = {
 
 export const MotionTo = {
 	async bind (el, binding, vnode) {
-		const _vm = vnode.componentInstance || vnode.context
+		const _vm = vnode.context //vnode.componentInstance || vnode.context
 		const styles = store.get(binding.value)
 
 		if (styles === null || _vm.__motionInjected) return
