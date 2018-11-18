@@ -1,5 +1,6 @@
 //import '@babel/polyfill'
 import * as _directives from './directives'
+import { waitForCreate } from './utils'
 
 export default {
 	install (Vue, options) {
@@ -12,11 +13,12 @@ export default {
 			.map(directive => Vue.directive(directive, directives[directive]))
 
 		Vue.mixin({
-			beforeRouteUpdate(to, from, next) {
-				if (this.__motionInjected)
-  					this.$nextTick(e => this.$emit('motion:show'))
-
+			async beforeRouteUpdate(to, from, next) {
 				next()
+
+				if (!this.__motionInjected) return
+				await waitForCreate(this)
+  				this.$nextTick(e => this.$emit('motion:show'))
 			},
 			beforeRouteLeave (to, from, next) {
 				if (this.__motionInjected) {
