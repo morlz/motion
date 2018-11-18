@@ -6,7 +6,7 @@
 npm run demo
 ```
 
-![](name-of-giphy.gif)
+![](demo.gif)
 
 ## Installing
 
