@@ -1,6 +1,6 @@
 {
 	"name": "@morlz/motion",
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"main": "./dist/motion.min.umd.js",
 	"keywords": [
 		"vue",
@@ -9,7 +9,8 @@
 		"morlz"
 	],
 	"files": [
-		"dist/motion.min.umd.js"
+		"dist/motion.min.umd.js",
+		"demo.gif",
 	],
 	"license": "MIT",
 	"description": "Vue directives for transition components between routes",
