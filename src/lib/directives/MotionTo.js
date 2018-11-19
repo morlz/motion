@@ -19,6 +19,7 @@ export const MotionTo = {
 		const _vm = vnode.context
 
 		_vm.$motion.options.quasar
+		&& vnode.componentOptions
 		&& vnode.componentOptions.tag == 'q-modal'
 		&& vnode.componentOptions.propsData.noRouteDismiss === undefined
 		&& vnode.componentOptions.propsData.noRouteDismiss === false
