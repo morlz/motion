@@ -44,11 +44,11 @@ export default {
   				this.$nextTick(e => this.$emit('motion:show'))
 			},
 			beforeRouteLeave (to, from, next) {
-				if (this.__motionInjected) {
-					this.$once('motion:hided', e => next())
-					this.$emit('motion:hide')
-				} else
-					next()
+				if (!this.__motionInjected)
+					return next()
+
+				this.$once('motion:hided', e => next())
+				this.$emit('motion:hide')
 			}
 		})
 	}

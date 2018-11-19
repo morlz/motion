@@ -1,7 +1,6 @@
 <template>
-	<q-modal
+	<div
 		class="Modal"
-		no-route-dismiss
 		v-motion-to="'item'">
 		<div
 			v-if="content"
@@ -22,20 +21,14 @@
 					{{ content.content }}
 				</div>
 			</transition>
-
 		</div>
-	</q-modal>
-
+	</div>
 </template>
 
 <script>
-import QModal from './QModal'
 
 export default {
 	name: 'ItemFull',
-	components: {
-		QModal
-	},
 	computed: {
 		content () {
 			return this.$store.state.items
