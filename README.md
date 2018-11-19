@@ -1,15 +1,13 @@
+
 # @morlz/motion
-
 ## Demo
-
 ```
 npm run demo
 ```
-
+See gif:
 ![](demo.gif)
 
 ## Installing
-
 ```
 npm i @morlz/motion
 yarn add @morlz/motion
@@ -51,7 +49,7 @@ List.vue
 Modal.vue
 ```html
 <modal v-motion-to="'anynamespace'">
-	some stuff
+	<item-full/>
 </modal>
 ```
 
@@ -59,7 +57,7 @@ routes.js
 ```js
 {
 	path: '/any-path/',
-	component: () =>import ('#/Layout'),
+	component: () => import ('#/Layout'),
 	children: [
 		{
 			path: '',
@@ -75,17 +73,38 @@ routes.js
 			}
 		},
 	]
-},
+}
 ```
 
-## Events
+> If you use Quasar-framework then use the noRouteDismiss attribute on QModal
+>
+## API
 
-v-motion-to Has emit the following events to context:
+### Events
+`v-motion-to` Has emit the following events to context vm:
 - `motion:show` when show animation start
 - `motion:showed` when show animation end
 - `motion:hide` when hide animation start
 - `motion:hided` when hide animation end
-- `motion:move` when animation is running
+- `motion:move(styles)` when animation is running
+
+### Modifers
+`v-motion-from.round` If the starting block is round
+
+### Styles
+ - `width` range 0 - 100 **%**
+ - `height` range 0 - 100 **%**
+ - `x` **px** position at the page by x axis
+ - `y` **px** position at the page by y axis
+ - `r` range 0 - 1 border radius
+ - `progress` range 0 - 1 animation position
+
+### Injected $motion
+Object styles `vm.$motion` updates only in the component containing v-motion-to.
+- `current` current styles
+- `progress` progress from styles
+- `to` styles of fullscreen modal
+
 
 # MIT License
 
