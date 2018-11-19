@@ -34,14 +34,14 @@ const __getObjects = node => ({
 })
 
 export default (vm, node, styles) => {
-	for (var style in styles)
-		vm.$motion[style] = styles[style]
+	vm.$motion.progress = styles.progress
+	vm.$motion.current = styles
 
 	let { wrapper, content, toolbar, firstChild } = __getObjects(node)
 	if (wrapper) css(wrapper, formatters.wrapper(styles))
 	if (content) css(content, formatters.content(styles))
 	if (toolbar) css(toolbar, formatters.toolbar(styles))
 
-	vm.$emit('motion:move', vm.$motion)
+	vm.$emit('motion:move', styles)
 	vm.$forceUpdate()
 }

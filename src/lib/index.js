@@ -2,12 +2,31 @@
 import * as _directives from './directives'
 import store from './directives/MotionStore'
 import { waitForCreate } from './utils'
+import { easing } from 'popmotion'
+
+const defaultOptions = {
+	duration: 375,
+	quasar: false,
+	easing: easing.cubicBezier(.4, .0, .2, 1)
+}
 
 export default {
-	install (Vue, options) {
-		let directives = { ..._directives }
+	install (Vue, options = {}) {
+		const directives = { ..._directives }
 
-		Vue.prototype.$motion = {}
+		Vue.prototype.$motion = {
+			options: { ...defaultOptions, ...options },
+			progress: 0,
+			current: {},
+			to: {
+				width: 100,
+				height: 100,
+				x: 0,
+				y: 0,
+				r: 0,
+				progress: 1
+			}
+		}
 
 		Object
 			.keys(directives)

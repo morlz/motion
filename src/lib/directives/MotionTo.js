@@ -1,32 +1,29 @@
 import store from './MotionStore'
-import { tween, easing } from 'popmotion'
+import { tween } from 'popmotion'
 import css from 'dom-css'
 
-import { setStyles, waitForCreate } from '../utils'
+import {
+	setStyles,
+	waitForCreate,
+	getAnimationOptions,
+	getToWH
+} from '../utils'
 
 const __inject = async (vm, name) => {
-	vm.$motion = {}
 	vm.__motionInjected = true
 	vm.$emit('motion:show')
 }
 
-const full = {
-	width: 100,
-	height: 100,
-	x: 0,
-	y: 0,
-	r: 0,
-	progress: 1
-}
-
-const anim = {
-	duration: 375,
-	easing: easing.cubicBezier(.4, .0, .2, 1)
-}
-
 export const MotionTo = {
 	async bind (el, binding, vnode) {
-		const _vm = vnode.context //vnode.componentInstance || vnode.context
+		const _vm = vnode.context
+
+		_vm.$motion.options.quasar
+		&& vnode.componentOptions.tag == 'q-modal'
+		&& vnode.componentOptions.propsData.noRouteDismiss === undefined
+		&& vnode.componentOptions.propsData.noRouteDismiss === false
+		&& console.warn('QModal without noRouteDismiss work wrong')
+
 		const name = binding.value
 
 		if (!store.has(name) || _vm.__motionInjected) return
@@ -47,15 +44,13 @@ export const MotionTo = {
 			tween({
 				from: {
 					...styles,
-					toWidth: full.width,
-					toHeight: full.height,
+					...getToWH(_vm.$motion.to)
 				},
 				to: {
-					...full,
-					toWidth: full.width,
-					toHeight: full.height,
+					..._vm.$motion.to,
+					...getToWH(_vm.$motion.to)
 				},
-				...anim
+				...getAnimationOptions(_vm)
 			})
 			.start({
 				update: v => setStyles(_vm, el, v),
@@ -74,16 +69,14 @@ export const MotionTo = {
 
 			tween({
 				from: {
-					...full,
-					toWidth: styles.width,
-					toHeight: styles.height,
+					..._vm.$motion.to,
+					...getToWH(styles)
 				},
 				to: {
 					...styles,
-					toWidth: styles.width,
-					toHeight: styles.height,
+					...getToWH(styles)
 				},
-				...anim
+				...getAnimationOptions(_vm)
 			})
 			.start({
 				update: v => setStyles(_vm, el, v),

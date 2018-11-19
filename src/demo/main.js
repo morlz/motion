@@ -8,7 +8,9 @@ import Motion from '@morlz/motion'
 
 Vue.config.productionTip = false
 
-Vue.use(Motion)
+Vue.use(Motion, {
+	quasar: true
+})
 
 new Vue({
 	el: '#app',

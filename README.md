@@ -20,18 +20,23 @@ index.js file:
 ```js
 import Vue from 'vue'
 import Motion from '@morlz/motion'
-Vue.use(Motion)
+
+//options are optional
+Vue.use(Motion, {
+	quasar: false,
+	duration: 375
+})
 ```
 
 Layout.vue
 ```html
-<div class="Layout">
+<layout>
 	<div>
 		<router-view name="list"/>
 	</div>
 
 	<router-view name="modal"/>
-</div>
+</layout>
 ```
 
 List.vue
@@ -45,9 +50,9 @@ List.vue
 
 Modal.vue
 ```html
-<div v-motion-to="'anynamespace'">
+<modal v-motion-to="'anynamespace'">
 	some stuff
-</div>
+</modal>
 ```
 
 routes.js
@@ -72,6 +77,15 @@ routes.js
 	]
 },
 ```
+
+## Events
+
+v-motion-to Has emit the following events to context:
+- `motion:show` when show animation start
+- `motion:showed` when show animation end
+- `motion:hide` when hide animation start
+- `motion:hided` when hide animation end
+- `motion:move` when animation is running
 
 # MIT License
 
