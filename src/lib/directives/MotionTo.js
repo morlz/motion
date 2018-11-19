@@ -21,8 +21,7 @@ export const MotionTo = {
 		_vm.$motion.options.quasar
 		&& vnode.componentOptions
 		&& vnode.componentOptions.tag == 'q-modal'
-		&& vnode.componentOptions.propsData.noRouteDismiss === undefined
-		&& vnode.componentOptions.propsData.noRouteDismiss === false
+		&& [false, undefined].includes(vnode.componentOptions.propsData.noRouteDismiss)
 		&& console.warn('QModal without noRouteDismiss work wrong')
 
 		const name = binding.value
