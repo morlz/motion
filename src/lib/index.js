@@ -34,14 +34,14 @@ export default {
 
 		Vue.mixin({
 			async beforeRouteUpdate(to, from, next) {
-				if (!this.__motionInjected)
-					return next()
-
-				await store.resolve(name)
 				next()
+				if (!this.__motionInjected) return
 
-				await waitForCreate(this)
-  				this.$nextTick(e => this.$emit('motion:show'))
+				this.$once('motion:hided', async () => {
+					if (this.$motion.progress) return
+					await waitForCreate(this)
+					this.$nextTick(e => this.$emit('motion:show'))
+				})
 			},
 			beforeRouteLeave (to, from, next) {
 				if (!this.__motionInjected)

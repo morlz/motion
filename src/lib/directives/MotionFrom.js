@@ -5,7 +5,13 @@ export const MotionFrom = {
 		const _vm = vnode.context
 		const name = binding.value
 
-		el.addEventListener('click', e => store.set(name, el))
+		el.addEventListener(
+			'click', 
+			e => store.set(
+				name,
+				el.getBoundingClientRect()
+			)
+		)
 
 		if (binding.modifiers.round)
 			store.setRound(name)

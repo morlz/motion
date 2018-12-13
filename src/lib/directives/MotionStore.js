@@ -10,7 +10,7 @@ class MotionStore {
 		if (!this.has(name))
 			return null
 
-		const rect = this.motions[name].getBoundingClientRect()
+		const rect = this.motions[name]
 
 		return {
 			width: rect.width / window.innerWidth * 100,
@@ -22,8 +22,8 @@ class MotionStore {
 		}
 	}
 
-	set (name, node) {
-		this.motions[name] = node
+	set (name, rect) {
+		this.motions[name] = rect
 	}
 
 	unset (name) {
@@ -46,23 +46,11 @@ class MotionStore {
 	}
 
 	close (name) {
-		if (typeof this.opened[name] == 'function')
-			this.opened[name]()
-
 		this.opened[name] = false
 	}
 
 	isOpened (name) {
 		return !!this.opened[name]
-	}
-
-	resolve (name) {
-		return new Promise(resolve => {
-			if (this.isOpened(name))
-				this.opened[name] = resolve
-			else
-				resolve()
-		})
 	}
 }
 
