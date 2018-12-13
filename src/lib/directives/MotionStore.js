@@ -26,6 +26,11 @@ class MotionStore {
 		this.motions[name] = node
 	}
 
+	unset (name) {
+		this.set(name, undefined)
+		this.setRound(name, undefined)
+	}
+
 	has (name) {
 		return !!this.motions[name]
 	}

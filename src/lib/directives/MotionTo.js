@@ -26,7 +26,7 @@ export const MotionTo = {
 
 		const name = binding.value
 
-		if (!store.has(name) || _vm.__motionInjected) return
+		if (_vm.__motionInjected) return
 
 		const oldOveflow = css.get(el, 'overflow')
 		css.set(el, {
@@ -35,6 +35,12 @@ export const MotionTo = {
 		})
 
 		await waitForCreate(_vm)
+
+		if (!store.has(name))
+			return setStyles(_vm, el, {
+				..._vm.$motion.to,
+				...getToWH(_vm.$motion.to)
+			})
 
 		_vm.$on('motion:show', () => {
 			const styles = store.get(name)
